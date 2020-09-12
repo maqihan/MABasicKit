@@ -7,7 +7,6 @@
 //
 
 #import "MAViewController.h"
-#import "UIColor+MAExtend.h"
 
 @interface MAViewController ()
 
