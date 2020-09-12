@@ -1,0 +1,6 @@
+framework module MABasicKit {
+  umbrella header "MABasicKit-umbrella.h"
+
+  export *
+  module * { export * }
+}

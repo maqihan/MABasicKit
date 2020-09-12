@@ -1,0 +1,16 @@
+PODS:
+  - MABasicKit (0.1.0)
+
+DEPENDENCIES:
+  - MABasicKit (from `../`)
+
+EXTERNAL SOURCES:
+  MABasicKit:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  MABasicKit: 2ee814a48c01d31f893590d0967035c80c290d3e
+
+PODFILE CHECKSUM: 0d3c53c30258d59136e32aaa5e4ee23dfe09841e
+
+COCOAPODS: 1.7.4

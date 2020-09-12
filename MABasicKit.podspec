@@ -9,16 +9,9 @@
 Pod::Spec.new do |s|
   s.name             = 'MABasicKit'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of MABasicKit.'
-
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!
-
+  s.summary          = 'iOS基础库'
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+iOS基础库
                        DESC
 
   s.homepage         = 'https://github.com/Admin/MABasicKit'
@@ -30,7 +23,7 @@ TODO: Add long description of the pod here.
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = 'MABasicKit/Classes/**/*'
+  s.source_files = 'MABasicKit/Classes/MABasicKit.h'
   
   # s.resource_bundles = {
   #   'MABasicKit' => ['MABasicKit/Assets/*.png']
@@ -39,4 +32,13 @@ TODO: Add long description of the pod here.
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
   # s.dependency 'AFNetworking', '~> 2.3'
+  
+  s.subspec 'UI' do |ss|
+    
+    ss.subspec 'ExpendListView' do |sss|
+      sss.source_files = 'MABasicKit/Classes/ExpendListView/*.{h,m}'
+    end
+    
+  end
+  
 end
