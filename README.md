@@ -21,10 +21,6 @@ it, simply add the following line to your Podfile:
 pod 'MABasicKit'
 ```
 
-## Author
-
-Admin, 1250307429@qq.com
-
 ## License
 
 MABasicKit is available under the MIT license. See the LICENSE file for more info.
