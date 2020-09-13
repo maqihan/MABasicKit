@@ -33,12 +33,16 @@ iOS基础库
   # s.frameworks = 'UIKit', 'MapKit'
   # s.dependency 'AFNetworking', '~> 2.3'
   
-  s.subspec 'UI' do |ss|
-    
-    ss.subspec 'ExpendListView' do |sss|
-      sss.source_files = 'MABasicKit/Classes/ExpendListView/*.{h,m}'
-    end
-    
-  end
+#  s.subspec 'UI' do |ss|
+#
+#    ss.subspec 'ExpendListView' do |sss|
+#      sss.source_files = 'MABasicKit/Classes/ExpendListView/*.{h,m}'
+#    end
+#
+#  end
   
+  s.subspec 'Utils' do |ss|
+    ss.source_files = 'MABasicKit/Classes/Utils/*.{h,m}'
+  end
+
 end

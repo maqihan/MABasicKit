@@ -7,12 +7,19 @@
 //
 
 #import "MAAppDelegate.h"
+#import "MAHomeViewController.h"
 
 @implementation MAAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
     // Override point for customization after application launch.
+    self.window.backgroundColor = UIColor.whiteColor;
+    
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:MAHomeViewController.new];
+    self.window.rootViewController = navigationController;
+    [self.window makeKeyAndVisible];
     return YES;
 }
 

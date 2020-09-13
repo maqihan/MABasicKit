@@ -3,7 +3,9 @@ use_frameworks!
 platform :ios, '8.0'
 
 target 'MABasicKit_Example' do
-  pod 'MABasicKit', :path => '../'
+  pod 'MABasicKit/Utils', :path => '../'
+  pod 'Masonry'
+  pod 'MJExtension'
 
   target 'MABasicKit_Tests' do
     inherit! :search_paths

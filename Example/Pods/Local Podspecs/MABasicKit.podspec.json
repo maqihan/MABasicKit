@@ -1,15 +1,15 @@
 {
   "name": "MABasicKit",
   "version": "0.1.0",
-  "summary": "A short description of MABasicKit.",
-  "description": "TODO: Add long description of the pod here.",
+  "summary": "iOS基础库",
+  "description": "iOS基础库",
   "homepage": "https://github.com/Admin/MABasicKit",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
   },
   "authors": {
-    "Admin": "1250307429@qq.com"
+    "maqihan": "1250307429@qq.com"
   },
   "source": {
     "git": "https://github.com/Admin/MABasicKit.git",
@@ -18,5 +18,11 @@
   "platforms": {
     "ios": "8.0"
   },
-  "source_files": "MABasicKit/Classes/Utils/*.{h,m}"
+  "source_files": "MABasicKit/Classes/MABasicKit.h",
+  "subspecs": [
+    {
+      "name": "Utils",
+      "source_files": "MABasicKit/Classes/Utils/*.{h,m}"
+    }
+  ]
 }
