@@ -5,11 +5,12 @@
 [![License](https://img.shields.io/cocoapods/l/MABasicKit.svg?style=flat)](https://cocoapods.org/pods/MABasicKit)
 [![Platform](https://img.shields.io/cocoapods/p/MABasicKit.svg?style=flat)](https://cocoapods.org/pods/MABasicKit)
 
-## Example
+## 简介
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+MABasicKit 目的是为了提高开发效率，完善工程结构的基础组件库，计划包含两个——UI subspec 和 Utils subspec，后期会慢慢完善
 
-## Requirements
+## 功能特性
+1.目前只包含多级列表的演示
 
 ## Installation
 
@@ -19,10 +20,6 @@ it, simply add the following line to your Podfile:
 ```ruby
 pod 'MABasicKit'
 ```
-
-## Author
-
-Admin, 1250307429@qq.com
 
 ## License
 
