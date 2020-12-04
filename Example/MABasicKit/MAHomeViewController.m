@@ -26,8 +26,9 @@ static NSString * const cell_ID   = @"MAHomeListCellID";
     // Do any additional setup after loading the view, typically from a nib.
     self.navigationItem.title = @"Example List";
     self.dataArray = @[@{@"vc":@"MAExpendListViewController",
-                         @"title":@"多级列表",
-                         @"desc":@"支持选择状态，多级展开，多级折叠"}];
+                         @"title":@"多级列表"},
+                       @{@"vc":@"MACalendarContainerViewController",
+                         @"title":@"日历"}];
     
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
