@@ -9,8 +9,20 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
+@protocol MATimedEventsViewLayoutDelegate;
 
 @interface MATimedEventsViewLayout : UICollectionViewLayout
+
+@property (nonatomic, weak) id<MATimedEventsViewLayoutDelegate> delegate;
+
+@property (nonatomic) CGFloat minimumVisibleHeight;
+@property (nonatomic) BOOL ignoreNextInvalidation;
+@end
+
+@protocol MATimedEventsViewLayoutDelegate <UICollectionViewDelegate>
+
+// x and width of returned rect are ignored
+- (CGRect)collectionView:(UICollectionView*)collectionView layout:(MATimedEventsViewLayout*)layout rectForEventAtIndexPath:(NSIndexPath*)indexPath;
 
 @end
 

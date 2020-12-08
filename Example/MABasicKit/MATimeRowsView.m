@@ -7,6 +7,8 @@
 //
 
 #import "MATimeRowsView.h"
+#import "MGCAlignedGeometry.h"
+
 @interface MATimeRowsView()
 
 @property (assign , nonatomic) NSRange hourRange;
@@ -15,22 +17,31 @@
 @property (assign , nonatomic) CGFloat timeColumnWidth;    
 @property (strong , nonatomic) NSCalendar *calendar;
 @property (strong , nonatomic) NSDateFormatter *dateFormatter;
-
+@property (strong , nonatomic) UIColor *currentTimeColor;
+@property (strong , nonatomic) UIColor *timeColor;
+@property (assign , nonatomic) NSTimeInterval timeMark;
 @end
 
 @implementation MATimeRowsView
 
-- (instancetype)init
+- (instancetype)initWithFrame:(CGRect)frame
 {
-    self = [super init];
+    self = [super initWithFrame:frame];
     if (self) {
+        
+        self.backgroundColor = [UIColor whiteColor];
+        
         _hourRange = NSMakeRange(0, 24);
         _rounding = 15;
         _hourSlotHeight = 65;
         _insetsHeight = 45;
+        _timeColumnWidth = 60;
+        _currentTimeColor = [UIColor redColor];
+        _timeColor = [UIColor lightGrayColor];
     }
     return self;
 }
+
 
 - (NSAttributedString*)attributedStringForTimeMark:(MATimeMark)mark time:(NSTimeInterval)ti
 {
@@ -39,14 +50,14 @@
     if (!attrStr) {
         BOOL rounded = (mark != MATimeMarkCurrent);
         BOOL minutesOnly = (mark == MATimeMarkFloating);
-
+        
         NSString *str = [self stringForTime:ti rounded:rounded minutesOnly:minutesOnly];
-    
+        
         NSMutableParagraphStyle *style = [NSMutableParagraphStyle new];
         style.alignment = NSTextAlignmentRight;
         
-        UIColor *color = (mark == MATimeMarkCurrent) ? [UIColor redColor] : [UIColor blackColor];
-        UIFont *font = [UIFont systemFontOfSize:15];
+        UIColor *color = (mark == MATimeMarkCurrent) ? self.currentTimeColor : self.timeColor;
+        UIFont *font = [UIFont systemFontOfSize:12];
         
         attrStr = [[NSAttributedString alloc] initWithString:str attributes:
                    @{NSFontAttributeName: font,
@@ -64,7 +75,7 @@
     
     int hour = (int)(time / 3600) % 24;
     int minutes = ((int)time % 3600) / 60;
-
+    
     if (minutesOnly) {
         return [NSString stringWithFormat:@":%02d", minutes];
     }
@@ -79,14 +90,19 @@
     return (time / 3600. - self.hourRange.location) * self.hourSlotHeight + self.insetsHeight;
 }
 
+- (BOOL)canDisplayTime:(NSTimeInterval)ti
+{
+    CGFloat hour = ti/3600.;
+    return hour >= self.hourRange.location && hour <= NSMaxRange(self.hourRange);
+}
+
 - (void)drawRect:(CGRect)rect
 {
     const CGFloat kSpacing = 5.;
-    const CGFloat dash[2]= {2, 3};
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    CGSize markSizeMax = CGSizeMake(CGRectGetWidth(self.frame), CGFLOAT_MAX);
+    CGSize markSizeMax = CGSizeMake(self.timeColumnWidth - 2.*kSpacing, CGFLOAT_MAX);
     
     NSDate *now = [NSDate date];
     NSDateComponents *comps = [self.calendar components:NSCalendarUnitHour|NSCalendarUnitMinute|NSCalendarUnitSecond fromDate:now];
@@ -105,9 +121,8 @@
     CGRect lineRect = CGRectMake(self.timeColumnWidth - kSpacing, y, self.bounds.size.width - self.timeColumnWidth + kSpacing, 1);
     CGContextSetFillColorWithColor(context, self.currentTimeColor.CGColor);
     UIRectFill(lineRect);
-
     
-    NSAttributedString *floatingMarkAttrStr = [self attributedStringForTimeMark:MGCDayPlannerTimeMarkFloating time:self.timeMark];
+    NSAttributedString *floatingMarkAttrStr = [self attributedStringForTimeMark:MATimeMarkFloating time:self.timeMark];
     markSize = [floatingMarkAttrStr boundingRectWithSize:markSizeMax options:NSStringDrawingUsesLineFragmentOrigin context:nil].size;
     
     y = [self yOffsetForTime:self.timeMark rounded:YES];
@@ -118,15 +133,15 @@
     
     for (NSUInteger i = self.hourRange.location; i <=  NSMaxRange(self.hourRange); i++) {
         
-        markAttrStr = [self attributedStringForTimeMark:MGCDayPlannerTimeMarkHeader time:(i % 24)*3600];
+        markAttrStr = [self attributedStringForTimeMark:MATimeMarkDefault time:(i % 24)*3600];
         markSize = [markAttrStr boundingRectWithSize:markSizeMax options:NSStringDrawingUsesLineFragmentOrigin context:nil].size;
         
         y = MGCAlignedFloat((i - self.hourRange.location) * self.hourSlotHeight + self.insetsHeight) - lineWidth * .5;
         CGRect r = MGCAlignedRectMake(kSpacing, y - markSize.height / 2., markSizeMax.width, markSize.height);
-
-        if (!CGRectIntersectsRect(r, rectCurTime) || !self.showsCurrentTime) {
+        NSLog(@"========%@",NSStringFromCGRect(r));
+        if (!CGRectIntersectsRect(r, rectCurTime)) {
             [markAttrStr drawInRect:r];
-         }
+        }
         
         CGContextSetStrokeColorWithColor(context, self.timeColor.CGColor);
         CGContextSetLineWidth(context, lineWidth);
@@ -135,18 +150,10 @@
         CGContextAddLineToPoint(context, self.timeColumnWidth + rect.size.width, y);
         CGContextStrokePath(context);
         
-        if (self.showsHalfHourLines && i < NSMaxRange(self.hourRange)) {
-            y = MGCAlignedFloat(y + self.hourSlotHeight/2.) - lineWidth * .5;
-            CGContextSetLineDash(context, 0, dash, 2);
-            CGContextMoveToPoint(context, self.timeColumnWidth, y),
-            CGContextAddLineToPoint(context, self.timeColumnWidth + rect.size.width, y);
-            CGContextStrokePath(context);
-        }
-        
         // don't draw time mark if it intersects any other mark
         drawTimeMark &= !CGRectIntersectsRect(r, rectTimeMark);
     }
-
+    
     if (drawTimeMark) {
         [floatingMarkAttrStr drawInRect:rectTimeMark];
     }

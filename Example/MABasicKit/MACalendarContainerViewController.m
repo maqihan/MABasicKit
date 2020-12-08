@@ -22,6 +22,7 @@ static NSString * const cell_id_0   = @"MACalendarContainerCellID";
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"日历";
+    self.navigationController.navigationBar.translucent = NO;
     
     [self.view addSubview:self.containerView];
     [self.containerView mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -30,6 +30,11 @@
 		7B9F7F432577838600B8CEC7 /* MACalendarContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9F7F422577838600B8CEC7 /* MACalendarContainerViewController.m */; };
 		7BB42960257A25E3001EC6EA /* MACalendarContainerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB4295F257A25E3001EC6EA /* MACalendarContainerCell.m */; };
 		7BB4296A257A296D001EC6EA /* MATimeRowsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB42969257A296D001EC6EA /* MATimeRowsView.m */; };
+		7BDF5F0B257CD16F0022404C /* MGCAlignedGeometry.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BDF5F0A257CD16F0022404C /* MGCAlignedGeometry.m */; };
+		7BDF5F0E257D1BEA0022404C /* MATimedEventsViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BDF5F0D257D1BEA0022404C /* MATimedEventsViewLayout.m */; };
+		7BDF5F12257D1CA40022404C /* MAEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BDF5F11257D1CA40022404C /* MAEventCell.m */; };
+		7BDF5F15257D247E0022404C /* MAEventCellLayoutAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BDF5F14257D247E0022404C /* MAEventCellLayoutAttributes.m */; };
+		7BDF5F18257D24C30022404C /* MATimedEventsViewLayoutInvalidationContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BDF5F17257D24C30022404C /* MATimedEventsViewLayoutInvalidationContext.m */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		BFDD65EAFBBA6E51DFECA923 /* Pods_MABasicKit_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1688BE422240E97B2DD9BF5C /* Pods_MABasicKit_Tests.framework */; };
 /* End PBXBuildFile section */
@@ -88,6 +93,16 @@
 		7BB4295F257A25E3001EC6EA /* MACalendarContainerCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MACalendarContainerCell.m; sourceTree = "<group>"; };
 		7BB42968257A296D001EC6EA /* MATimeRowsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MATimeRowsView.h; sourceTree = "<group>"; };
 		7BB42969257A296D001EC6EA /* MATimeRowsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MATimeRowsView.m; sourceTree = "<group>"; };
+		7BDF5F09257CD16F0022404C /* MGCAlignedGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGCAlignedGeometry.h; sourceTree = "<group>"; };
+		7BDF5F0A257CD16F0022404C /* MGCAlignedGeometry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGCAlignedGeometry.m; sourceTree = "<group>"; };
+		7BDF5F0C257D1BEA0022404C /* MATimedEventsViewLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MATimedEventsViewLayout.h; sourceTree = "<group>"; };
+		7BDF5F0D257D1BEA0022404C /* MATimedEventsViewLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MATimedEventsViewLayout.m; sourceTree = "<group>"; };
+		7BDF5F10257D1CA40022404C /* MAEventCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MAEventCell.h; sourceTree = "<group>"; };
+		7BDF5F11257D1CA40022404C /* MAEventCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MAEventCell.m; sourceTree = "<group>"; };
+		7BDF5F13257D247D0022404C /* MAEventCellLayoutAttributes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MAEventCellLayoutAttributes.h; sourceTree = "<group>"; };
+		7BDF5F14257D247E0022404C /* MAEventCellLayoutAttributes.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MAEventCellLayoutAttributes.m; sourceTree = "<group>"; };
+		7BDF5F16257D24C30022404C /* MATimedEventsViewLayoutInvalidationContext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MATimedEventsViewLayoutInvalidationContext.h; sourceTree = "<group>"; };
+		7BDF5F17257D24C30022404C /* MATimedEventsViewLayoutInvalidationContext.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MATimedEventsViewLayoutInvalidationContext.m; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8876E6DA157F6E47B4F8EBC3 /* Pods_MABasicKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MABasicKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B65B99AE896518634028277E /* MABasicKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = MABasicKit.podspec; path = ../MABasicKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -268,6 +283,9 @@
 		7B9F7F40257782F000B8CEC7 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
+				7BDF5F0F257D1C720022404C /* EventView */,
+				7BDF5F09257CD16F0022404C /* MGCAlignedGeometry.h */,
+				7BDF5F0A257CD16F0022404C /* MGCAlignedGeometry.m */,
 				7B9F7F412577838600B8CEC7 /* MACalendarContainerViewController.h */,
 				7B9F7F422577838600B8CEC7 /* MACalendarContainerViewController.m */,
 				7BB4295E257A25E3001EC6EA /* MACalendarContainerCell.h */,
@@ -276,6 +294,21 @@
 				7BB42969257A296D001EC6EA /* MATimeRowsView.m */,
 			);
 			name = Calendar;
+			sourceTree = "<group>";
+		};
+		7BDF5F0F257D1C720022404C /* EventView */ = {
+			isa = PBXGroup;
+			children = (
+				7BDF5F0C257D1BEA0022404C /* MATimedEventsViewLayout.h */,
+				7BDF5F0D257D1BEA0022404C /* MATimedEventsViewLayout.m */,
+				7BDF5F10257D1CA40022404C /* MAEventCell.h */,
+				7BDF5F11257D1CA40022404C /* MAEventCell.m */,
+				7BDF5F13257D247D0022404C /* MAEventCellLayoutAttributes.h */,
+				7BDF5F14257D247E0022404C /* MAEventCellLayoutAttributes.m */,
+				7BDF5F16257D24C30022404C /* MATimedEventsViewLayoutInvalidationContext.h */,
+				7BDF5F17257D24C30022404C /* MATimedEventsViewLayoutInvalidationContext.m */,
+			);
+			name = EventView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -452,6 +485,10 @@
 			files = (
 				6003F59E195388D20070C39A /* MAAppDelegate.m in Sources */,
 				7B082E72250CEA8C0001A6DB /* MAHomeListCell.m in Sources */,
+				7BDF5F12257D1CA40022404C /* MAEventCell.m in Sources */,
+				7BDF5F0E257D1BEA0022404C /* MATimedEventsViewLayout.m in Sources */,
+				7BDF5F0B257CD16F0022404C /* MGCAlignedGeometry.m in Sources */,
+				7BDF5F15257D247E0022404C /* MAEventCellLayoutAttributes.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				7B58927E250D168E0093592E /* MAExpendListModel.m in Sources */,
 				7B58927B250D15420093592E /* MAExpendListViewController.m in Sources */,
@@ -459,6 +496,7 @@
 				7B082E75250CEB2D0001A6DB /* MAHomeViewController.m in Sources */,
 				7B589288250D21A00093592E /* SDInternalMacros.m in Sources */,
 				7B9F7F432577838600B8CEC7 /* MACalendarContainerViewController.m in Sources */,
+				7BDF5F18257D24C30022404C /* MATimedEventsViewLayoutInvalidationContext.m in Sources */,
 				7BB4296A257A296D001EC6EA /* MATimeRowsView.m in Sources */,
 				7B589281250D1C100093592E /* MAExpendListCell.m in Sources */,
 			);

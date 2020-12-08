@@ -9,5 +9,12 @@
 #import "MATimedEventsViewLayoutInvalidationContext.h"
 
 @implementation MATimedEventsViewLayoutInvalidationContext
+- (instancetype)init {
+    if (self = [super init]) {
+        self.invalidateDimmingViews = NO;
+        self.invalidateEventCells = YES;
+    }
+    return self;
+}
 
 @end
