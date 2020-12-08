@@ -19,12 +19,13 @@
 @property (nonatomic, strong) MATimedEventsViewLayout *timedEventsViewLayout;
 @property (nonatomic, strong) UICollectionView *timedEventsView;
 
+@property (nonatomic, strong) UIView *interactiveEventView;
+
 @end
 
 @implementation MACalendarContainerCell
 
 static NSString* const event_cell_id = @"MAEventCellID";
-
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -39,6 +40,36 @@ static NSString* const event_cell_id = @"MAEventCellID";
     return self;
 }
 
+- (void)dealloc
+{
+    
+}
+
+#pragma mark - Gesture
+
+- (void)handleLongPress:(UILongPressGestureRecognizer*)gesture
+{
+    CGPoint ptSelf = [gesture locationInView:self];
+    
+    UICollectionView *view = (UICollectionView*)gesture.view;
+    NSIndexPath *path = [view indexPathForItemAtPoint:[gesture locationInView:view]];
+    if (path) {
+        
+        UICollectionViewCell *cell = [view cellForItemAtIndexPath:path];
+        self.interactiveEventView.frame = cell.frame;
+        self.interactiveEventView.center = cell.center;
+
+    }else{
+        self.interactiveEventView.frame = CGRectMake(0, 0, 200, 60);
+        self.interactiveEventView.center = ptSelf;
+    }
+    
+    if (!self.interactiveEventView.superview) {
+        [self.timedEventsView addSubview:self.interactiveEventView];
+    }
+    
+}
+
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -48,13 +79,13 @@ static NSString* const event_cell_id = @"MAEventCellID";
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 2;
+    return 5;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     MAEventCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:event_cell_id forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor redColor];
+    cell.backgroundColor = [UIColor grayColor];
     return cell;;
 }
 
@@ -67,7 +98,7 @@ static NSString* const event_cell_id = @"MAEventCellID";
 
 - (CGRect)collectionView:(UICollectionView*)collectionView layout:(MATimedEventsViewLayout*)layout rectForEventAtIndexPath:(NSIndexPath*)indexPath
 {
-    return CGRectMake(0, 200, 0, 150);
+    return CGRectMake(0, 150 + indexPath.row * 40, 0, 150);
 }
 
 #pragma mark - scrollView delegate
@@ -140,9 +171,9 @@ static NSString* const event_cell_id = @"MAEventCellID";
         
         [_timedEventsView registerClass:MAEventCell.class forCellWithReuseIdentifier:event_cell_id];
         
-//        UILongPressGestureRecognizer *longPress = [UILongPressGestureRecognizer new];
-//        [longPress addTarget:self action:@selector(handleLongPress:)];
-//        [_timedEventsView addGestureRecognizer:longPress];
+        UILongPressGestureRecognizer *longPress = [UILongPressGestureRecognizer new];
+        [longPress addTarget:self action:@selector(handleLongPress:)];
+        [_timedEventsView addGestureRecognizer:longPress];
 //
 //        UITapGestureRecognizer *tap = [UITapGestureRecognizer new];
 //        [tap addTarget:self action:@selector(handleTap:)];
@@ -155,5 +186,14 @@ static NSString* const event_cell_id = @"MAEventCellID";
     return _timedEventsView;
 }
 
+- (UIView *)interactiveEventView
+{
+    if (!_interactiveEventView) {
+        _interactiveEventView = [UIView new];
+        _interactiveEventView.backgroundColor = [UIColor redColor];
+        _interactiveEventView.layer.zPosition = 10;
+    }
+    return _interactiveEventView;
+}
 
 @end
