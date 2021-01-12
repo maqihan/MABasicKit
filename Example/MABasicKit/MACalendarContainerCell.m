@@ -10,16 +10,16 @@
 #import "MATimeRowsView.h"
 #import "MATimedEventsViewLayout.h"
 #import "MAEventCell.h"
+#import "MAEventFloatingView.h"
 
 @interface MACalendarContainerCell()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,MATimedEventsViewLayoutDelegate>
 
 @property (nonatomic, strong) UIScrollView *timeScrollView;
 @property (nonatomic, strong) MATimeRowsView *timeRowsView;
 
-@property (nonatomic, strong) MATimedEventsViewLayout *timedEventsViewLayout;
 @property (nonatomic, strong) UICollectionView *timedEventsView;
 
-@property (nonatomic, strong) UIView *interactiveEventView;
+@property (nonatomic, strong) MAEventFloatingView *floatingView;
 
 @end
 
@@ -35,7 +35,6 @@ static NSString* const event_cell_id = @"MAEventCellID";
         [self.contentView addSubview:self.timeScrollView];
         [self.timeScrollView addSubview:self.timeRowsView];
         [self.contentView addSubview:self.timedEventsView];
-
     }
     return self;
 }
@@ -49,25 +48,38 @@ static NSString* const event_cell_id = @"MAEventCellID";
 
 - (void)handleLongPress:(UILongPressGestureRecognizer*)gesture
 {
-    CGPoint ptSelf = [gesture locationInView:self];
-    
     UICollectionView *view = (UICollectionView*)gesture.view;
     NSIndexPath *path = [view indexPathForItemAtPoint:[gesture locationInView:view]];
     if (path) {
         
         UICollectionViewCell *cell = [view cellForItemAtIndexPath:path];
-        self.interactiveEventView.frame = cell.frame;
-        self.interactiveEventView.center = cell.center;
+        self.floatingView.frame = cell.frame;
+        self.floatingView.center = cell.center;
 
     }else{
-        self.interactiveEventView.frame = CGRectMake(0, 0, 200, 60);
-        self.interactiveEventView.center = ptSelf;
+        
+        CGPoint point = [gesture locationInView:view];
+        self.floatingView.frame = CGRectMake(0, 0, 200, 60);
+        self.floatingView.center = point;
     }
-    
-    if (!self.interactiveEventView.superview) {
-        [self.timedEventsView addSubview:self.interactiveEventView];
+    self.floatingView.hidden = NO;
+}
+
+- (void)handleTap:(UITapGestureRecognizer*)gesture
+{
+    if (_floatingView) {
+        self.floatingView.hidden = YES;
+        self.floatingView = nil;
+    }else{
+        UICollectionView *view = (UICollectionView*)gesture.view;
+        CGPoint point = [gesture locationInView:view];
+        self.floatingView.frame = CGRectMake(0, 0, 200, 60);
+        self.floatingView.center = point;
     }
-    
+}
+
+- (void)handlePanGesture:(UIPanGestureRecognizer*)gesture
+{
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -115,9 +127,10 @@ static NSString* const event_cell_id = @"MAEventCellID";
     [super layoutSubviews];
     
     self.timeScrollView.frame = self.contentView.bounds;
-    self.timeScrollView.contentSize = CGSizeMake(CGRectGetWidth(self.contentView.frame), 65 * 30);
+    self.timeScrollView.contentSize = CGSizeMake(CGRectGetWidth(self.contentView.frame), 65 *24);
     
     self.timedEventsView.frame = self.contentView.bounds;
+    self.timedEventsView.contentSize = CGSizeMake(CGRectGetWidth(self.contentView.frame), 650 *24);
 
     self.timeRowsView.frame = CGRectMake(0, 0, self.timeScrollView.contentSize.width, self.timeScrollView.contentSize.height);
 }
@@ -146,19 +159,14 @@ static NSString* const event_cell_id = @"MAEventCellID";
     return _timeRowsView;
 }
 
-- (MATimedEventsViewLayout*)timedEventsViewLayout
-{
-    if (!_timedEventsViewLayout) {
-        _timedEventsViewLayout = [MATimedEventsViewLayout new];
-        _timedEventsViewLayout.delegate = self;
-    }
-    return _timedEventsViewLayout;
-}
-
 - (UICollectionView*)timedEventsView
 {
     if (!_timedEventsView) {
-        _timedEventsView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:self.timedEventsViewLayout];
+        
+        MATimedEventsViewLayout *layout = [MATimedEventsViewLayout new];
+        layout.delegate = self;
+
+        _timedEventsView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
         _timedEventsView.backgroundColor = [UIColor clearColor];
         _timedEventsView.dataSource = self;
         _timedEventsView.delegate = self;
@@ -174,11 +182,11 @@ static NSString* const event_cell_id = @"MAEventCellID";
         UILongPressGestureRecognizer *longPress = [UILongPressGestureRecognizer new];
         [longPress addTarget:self action:@selector(handleLongPress:)];
         [_timedEventsView addGestureRecognizer:longPress];
-//
-//        UITapGestureRecognizer *tap = [UITapGestureRecognizer new];
-//        [tap addTarget:self action:@selector(handleTap:)];
-//        [_timedEventsView addGestureRecognizer:tap];
-//
+
+        UITapGestureRecognizer *tap = [UITapGestureRecognizer new];
+        [tap addTarget:self action:@selector(handleTap:)];
+        [_timedEventsView addGestureRecognizer:tap];
+
 //        UIPinchGestureRecognizer *pinch = [UIPinchGestureRecognizer new];
 //        [pinch addTarget:self action:@selector(handlePinch:)];
 //        [_timedEventsView addGestureRecognizer:pinch];
@@ -186,14 +194,19 @@ static NSString* const event_cell_id = @"MAEventCellID";
     return _timedEventsView;
 }
 
-- (UIView *)interactiveEventView
+- (MAEventFloatingView *)floatingView
 {
-    if (!_interactiveEventView) {
-        _interactiveEventView = [UIView new];
-        _interactiveEventView.backgroundColor = [UIColor redColor];
-        _interactiveEventView.layer.zPosition = 10;
+    if (!_floatingView) {
+        _floatingView = [MAEventFloatingView new];
+        _floatingView.backgroundColor = [UIColor redColor];
+        _floatingView.layer.zPosition = 10;
+        [self.timedEventsView addSubview:_floatingView];
+        
+        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
+        [_floatingView addGestureRecognizer:pan];
+
     }
-    return _interactiveEventView;
+    return _floatingView;
 }
 
 @end

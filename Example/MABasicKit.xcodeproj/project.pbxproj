@@ -30,6 +30,8 @@
 		7B9F7F432577838600B8CEC7 /* MACalendarContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9F7F422577838600B8CEC7 /* MACalendarContainerViewController.m */; };
 		7BB42960257A25E3001EC6EA /* MACalendarContainerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB4295F257A25E3001EC6EA /* MACalendarContainerCell.m */; };
 		7BB4296A257A296D001EC6EA /* MATimeRowsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB42969257A296D001EC6EA /* MATimeRowsView.m */; };
+		7BBD0B6425AC24C100B24780 /* MAEventFloatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BBD0B6325AC24C100B24780 /* MAEventFloatingView.m */; };
+		7BBD0B6925AC254900B24780 /* MATimeDialView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BBD0B6825AC254900B24780 /* MATimeDialView.m */; };
 		7BDF5F0B257CD16F0022404C /* MGCAlignedGeometry.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BDF5F0A257CD16F0022404C /* MGCAlignedGeometry.m */; };
 		7BDF5F0E257D1BEA0022404C /* MATimedEventsViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BDF5F0D257D1BEA0022404C /* MATimedEventsViewLayout.m */; };
 		7BDF5F12257D1CA40022404C /* MAEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BDF5F11257D1CA40022404C /* MAEventCell.m */; };
@@ -93,6 +95,10 @@
 		7BB4295F257A25E3001EC6EA /* MACalendarContainerCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MACalendarContainerCell.m; sourceTree = "<group>"; };
 		7BB42968257A296D001EC6EA /* MATimeRowsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MATimeRowsView.h; sourceTree = "<group>"; };
 		7BB42969257A296D001EC6EA /* MATimeRowsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MATimeRowsView.m; sourceTree = "<group>"; };
+		7BBD0B6225AC24C100B24780 /* MAEventFloatingView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MAEventFloatingView.h; sourceTree = "<group>"; };
+		7BBD0B6325AC24C100B24780 /* MAEventFloatingView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MAEventFloatingView.m; sourceTree = "<group>"; };
+		7BBD0B6725AC254900B24780 /* MATimeDialView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MATimeDialView.h; sourceTree = "<group>"; };
+		7BBD0B6825AC254900B24780 /* MATimeDialView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MATimeDialView.m; sourceTree = "<group>"; };
 		7BDF5F09257CD16F0022404C /* MGCAlignedGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGCAlignedGeometry.h; sourceTree = "<group>"; };
 		7BDF5F0A257CD16F0022404C /* MGCAlignedGeometry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGCAlignedGeometry.m; sourceTree = "<group>"; };
 		7BDF5F0C257D1BEA0022404C /* MATimedEventsViewLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MATimedEventsViewLayout.h; sourceTree = "<group>"; };
@@ -292,6 +298,8 @@
 				7BB4295F257A25E3001EC6EA /* MACalendarContainerCell.m */,
 				7BB42968257A296D001EC6EA /* MATimeRowsView.h */,
 				7BB42969257A296D001EC6EA /* MATimeRowsView.m */,
+				7BBD0B6725AC254900B24780 /* MATimeDialView.h */,
+				7BBD0B6825AC254900B24780 /* MATimeDialView.m */,
 			);
 			name = Calendar;
 			sourceTree = "<group>";
@@ -307,6 +315,8 @@
 				7BDF5F14257D247E0022404C /* MAEventCellLayoutAttributes.m */,
 				7BDF5F16257D24C30022404C /* MATimedEventsViewLayoutInvalidationContext.h */,
 				7BDF5F17257D24C30022404C /* MATimedEventsViewLayoutInvalidationContext.m */,
+				7BBD0B6225AC24C100B24780 /* MAEventFloatingView.h */,
+				7BBD0B6325AC24C100B24780 /* MAEventFloatingView.m */,
 			);
 			name = EventView;
 			sourceTree = "<group>";
@@ -490,11 +500,13 @@
 				7BDF5F0B257CD16F0022404C /* MGCAlignedGeometry.m in Sources */,
 				7BDF5F15257D247E0022404C /* MAEventCellLayoutAttributes.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
+				7BBD0B6925AC254900B24780 /* MATimeDialView.m in Sources */,
 				7B58927E250D168E0093592E /* MAExpendListModel.m in Sources */,
 				7B58927B250D15420093592E /* MAExpendListViewController.m in Sources */,
 				7BB42960257A25E3001EC6EA /* MACalendarContainerCell.m in Sources */,
 				7B082E75250CEB2D0001A6DB /* MAHomeViewController.m in Sources */,
 				7B589288250D21A00093592E /* SDInternalMacros.m in Sources */,
+				7BBD0B6425AC24C100B24780 /* MAEventFloatingView.m in Sources */,
 				7B9F7F432577838600B8CEC7 /* MACalendarContainerViewController.m in Sources */,
 				7BDF5F18257D24C30022404C /* MATimedEventsViewLayoutInvalidationContext.m in Sources */,
 				7BB4296A257A296D001EC6EA /* MATimeRowsView.m in Sources */,
